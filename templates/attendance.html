@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Attendance Management</h2>
+
+<div class="card">
+    <h3>Add Attendance</h3>
+
+    <form method="POST">
+        <input type="text" name="subject" placeholder="Subject Name" required>
+        <input type="number" name="total" placeholder="Total Classes" required>
+        <input type="number" name="attended" placeholder="Attended Classes" required>
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Attendance Records</h3>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Total Classes</th>
+            <th>Attended</th>
+            <th>Percentage</th>
+        </tr>
+
+        {% for r in records %}
+        <tr>
+            <td>{{ r.subject }}</td>
+            <td>{{ r.total_classes }}</td>
+            <td>{{ r.attended_classes }}</td>
+            <td>{{ r.percentage }}%</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

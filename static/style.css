@@ -1,0 +1,141 @@
+body.dark-body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+.sidebar {
+    width:220px;
+    height:100vh;
+    position:fixed;
+    background:#020617;
+    padding:20px;
+}
+
+.logo {
+    color:#38bdf8;
+}
+
+.sidebar a {
+    display:block;
+    color:white;
+    padding:12px;
+    text-decoration:none;
+    margin:10px 0;
+    border-radius:8px;
+}
+
+.sidebar a:hover {
+    background:#1e293b;
+}
+
+.logout {
+    background:#ef4444;
+}
+
+.main {
+    margin-left:240px;
+    padding:20px;
+}
+
+.topbar {
+    background:#020617;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.glass {
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter: blur(10px);
+    margin-bottom:20px;
+}
+
+.grid {
+    display:flex;
+    gap:20px;
+}
+
+.highlight {
+    background:linear-gradient(45deg,#38bdf8,#6366f1);
+}
+
+table {
+    width:100%;
+}
+
+th {
+    color:#38bdf8;
+}
+
+td {
+    padding:10px;
+}
+
+.btn {
+    background:#38bdf8;
+    padding:6px 12px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+}
+
+.login-dark {
+    background:#020617;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-card {
+    background:rgba(255,255,255,0.05);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(15px);
+    text-align:center;
+}
+
+input {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    background:#0f172a;
+    border:none;
+    color:white;
+}
+
+button {
+    width:100%;
+    padding:10px;
+    background:#38bdf8;
+    border:none;
+    color:white;
+}
+
+.search-bar {
+    display:flex;
+    gap:15px;
+    align-items:center;
+    flex-wrap: wrap;    
+}
+
+.search-bar input,
+.search-bar select {
+    padding:8px;
+    background:#020617;
+    border:none;
+    color:white;
+    border-radius:6px;
+}
+
+.btn.edit {
+    background:#22c55e;
+}
+
+.btn.delete {
+    background:#ef4444;
+}

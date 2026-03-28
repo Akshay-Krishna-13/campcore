@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>🏆 Top 5 Students (Academic Excellence)</h2>
+
+<div class="card">
+
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Average Marks</th>
+            <th>GPA</th>
+        </tr>
+
+        {% for t in toppers %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ t.student_name }}</td>
+            <td>{{ t.department_name }}</td>
+            <td>{{ t.average_marks }}</td>
+            <td>{{ t.gpa }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}

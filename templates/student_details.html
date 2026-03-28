@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Student Details</h2>
+
+<div class="card">
+    <h3>{{ student.student_name }}</h3>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Department:</strong> {{ student.department_name }}</p>
+
+    <a href="/attendance/{{ student.student_id }}" class="action-btn view">
+        📅 Manage Attendance
+    </a>
+</div>
+
+<div class="card">
+    <h3>Add Marks</h3>
+
+    <form method="POST">
+        <select name="course" required>
+            {% for c in all_courses %}
+                <option value="{{ c.course_id }}">
+                    {{ c.course_name }} (Sem {{ c.semester }})
+                </option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="marks" placeholder="Enter Marks" required>
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Subjects & Marks (Semester-wise)</h3>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Semester</th>
+            <th>Marks</th>
+            <th>Grade</th>
+            <th>Action</th>
+        </tr>
+
+        {% for sem in courses | groupby("semester") %}
+
+            <tr style="background:#e2e8f0;">
+                <td colspan="5">
+                    <strong>Semester {{ sem.grouper }}</strong>
+                </td>
+            </tr>
+
+            {% for c in sem.list %}
+            <tr>
+                <td>{{ c.course_name }}</td>
+                <td>Sem {{ c.semester }}</td>
+                <td>{{ c.marks }}</td>
+                <td>{{ c.grade }}</td>
+                <td>
+                    <a href="/delete_mark/{{ student.student_id }}/{{ c.course_id }}">
+                        🗑 Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

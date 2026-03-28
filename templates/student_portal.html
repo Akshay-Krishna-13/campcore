@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>My Academic Profile</h2>
+
+<!-- Student Info -->
+<div class="card profile-card">
+    <h3>{{ student.student_name }}</h3>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+</div>
+
+<!-- Academic Performance -->
+<div class="card">
+    <h3>My Subjects & Marks</h3>
+
+    <table>
+        <tr>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Grade</th>
+        </tr>
+        
+        {% for c in courses %}
+        <tr>
+        <td>{{ c.course_name }}</td>
+        <td>{{ c.marks }}</td>
+        <td>{{ c.grade }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+</div>
+
+<!-- GPA & Average -->
+<div class="card">
+    <h3>Performance Summary</h3>
+    <p><strong>Average Marks:</strong> {{ average }}</p>
+    <p><strong>GPA:</strong> {{ gpa }}</p>
+</div>
+
+{% endblock %}

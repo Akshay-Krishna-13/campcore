@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="grid">
+
+    <div class="glass">
+        <h3>Total Students</h3>
+        <p>{{ total_students }}</p>
+    </div>
+
+    <div class="glass">
+        <h3>Departments</h3>
+        <p>{{ total_departments }}</p>
+    </div>
+
+    <div class="glass highlight">
+        <h3>Role</h3>
+        <p>Admin</p>
+    </div>
+
+</div>
+
+<!-- 🔥 DARK CHART SECTION -->
+<div class="glass">
+    <h3>Top 5 Students</h3>
+    <canvas id="topperChart"></canvas>
+</div>
+
+<!-- Chart CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const names = {{ names | tojson }};
+const averages = {{ averages | tojson }};
+
+const ctx = document.getElementById('topperChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: names,
+        datasets: [{
+            label: 'Average Marks',
+            data: averages,
+            backgroundColor: '#38bdf8',
+            borderRadius: 10
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: { color: "#e5e7eb" }
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: "#e5e7eb" },
+                grid: { color: "#1f2937" }
+            },
+            y: {
+                ticks: { color: "#e5e7eb" },
+                grid: { color: "#1f2937" },
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}

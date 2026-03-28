@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CampusCore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-body">
+
+<div class="sidebar">
+    <h2 class="logo">CampusCore</h2>
+
+    {% if session.get('role') == 'admin' %}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/view_students">Students</a>
+        <a href="/add_student">Add Student</a>
+        <a href="/topper_analytics">Analytics</a>
+    {% endif %}
+
+    {% if session.get('role')|lower == 'faculty' %}
+        <a href="/view_students">Students</a>
+
+        <!-- 🔹 NEW DAILY ATTENDANCE LINKS -->
+        <a href="/mark_daily_attendance/1">Mark Daily Attendance</a>
+        <a href="/attendance_day">View Daily Attendance</a>
+    {% endif %}
+
+    {% if session.get('role') == 'student' %}
+        <a href="/student_portal">My Profile</a>
+    {% endif %}
+
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        Welcome {{ session.get('user') }} ({{ session.get('role') }})
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

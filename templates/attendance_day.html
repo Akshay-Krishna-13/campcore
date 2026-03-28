@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>View Attendance by Date</h2>
+
+<form method="POST" class="glass">
+    <label>Select Date</label>
+    <input type="date" name="date" required>
+    <button type="submit">View</button>
+</form>
+
+{% if records %}
+<div class="glass">
+<table>
+
+<tr>
+<th>Student</th>
+<th>Subject</th>
+<th>Status</th>
+</tr>
+
+{% for r in records %}
+<tr {% if r.status == 'Absent' %} style="color:red" {% endif %}>
+<td>{{ r.student_name }}</td>
+<td>{{ r.course_name }}</td>
+<td>{{ r.status }}</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+{% endif %}
+
+
+{% if history %}
+<div class="glass">
+<h3>Absentee History</h3>
+
+{% for date, absentees in history.items() %}
+<div style="margin-bottom:20px;">
+
+<b>{{ date }}</b>
+
+<ul>
+{% for a in absentees %}
+<li>{{ a.student }} ({{ a.subject }})</li>
+{% endfor %}
+</ul>
+
+</div>
+{% endfor %}
+
+</div>
+{% endif %}
+
+{% endblock %}

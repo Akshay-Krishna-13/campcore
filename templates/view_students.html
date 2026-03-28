@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Students</h2>
+
+<!-- 🔍 SEARCH + SORT -->
+<div class="glass">
+
+<form method="GET" class="search-bar">
+    <input type="text" name="search" placeholder="Search by name or email">
+
+    <select name="sort">
+        <option value="">Sort By</option>
+        <option value="id">Student ID</option>
+        <option value="name">Name</option>
+        <option value="department">Department</option>
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+
+{% if session.get('role')|lower == 'faculty' %}
+
+<!-- ❌ FAILED STUDENTS -->
+<form method="GET">
+    <input type="hidden" name="show_f" value="true">
+    <button type="submit" class="btn delete">
+        Show F Students
+    </button>
+</form>
+
+<!-- ✅ PASSED STUDENTS -->
+<form method="GET">
+    <input type="hidden" name="show_p" value="true">
+    <button type="submit" class="btn edit">
+        Show Passed Students
+    </button>
+</form>
+
+{% endif %}
+
+</div>
+
+<!-- 📋 STUDENT TABLE -->
+<div class="glass">
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Dept</th>
+
+{% if show_failed %}
+<th>Failed Subject</th>
+<th>Marks</th>
+{% endif %}
+
+{% if show_passed %}
+<th>Passed Subject</th>
+<th>Marks</th>
+{% endif %}
+
+<th>Action</th>
+</tr>
+
+{% for s in students %}
+<tr>
+<td>{{ s.student_id }}</td>
+<td>{{ s.student_name }}</td>
+<td>{{ s.email }}</td>
+<td>{{ s.department_name }}</td>
+
+{% if show_failed %}
+<td style="color:#ef4444">{{ s.subject }}</td>
+<td style="color:#ef4444">{{ s.marks }}</td>
+{% endif %}
+
+{% if show_passed %}
+<td style="color:#22c55e">{{ s.subject }}</td>
+<td style="color:#22c55e">{{ s.marks }}</td>
+{% endif %}
+
+<td>
+<a href="/student_details/{{ s.student_id }}" class="btn">View</a>
+
+{% if session.get('role') == 'admin' %}
+<a href="/edit_student/{{ s.student_id }}" class="btn edit">Edit</a>
+
+<a href="/delete_student/{{ s.student_id }}"
+   onclick="return confirm('Delete this student?')"
+   class="btn delete">
+   Delete
+</a>
+{% endif %}
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+{% endblock %}

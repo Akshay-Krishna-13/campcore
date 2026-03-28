@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Edit Student</h2>
+
+<div class="card">
+    <form method="POST">
+
+        <input type="text" name="name"
+               value="{{ student.student_name }}" required>
+
+        <input type="email" name="email"
+               value="{{ student.email }}" required>
+
+        <select name="department" required>
+            {% for d in departments %}
+                <option value="{{ d.department_id }}"
+                    {% if d.department_id == student.department_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{ d.department_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Update Student</button>
+    </form>
+</div>
+
+{% endblock %}
